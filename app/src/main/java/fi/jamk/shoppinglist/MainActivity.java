@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements AddItemDialogFragment.Dial
                 R.layout.list_item, cursor,
                 new String[] {"item", "count", "price"},      // from
                 new int[] {R.id.item, R.id.count, R.id.price}    // to
-                ,1);  // flags
+                ,2);  // flags
 
         // show data in listView
         listView.setAdapter(adapter);
