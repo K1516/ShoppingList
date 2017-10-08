@@ -43,30 +43,21 @@ public class MainActivity extends Activity implements AddItemDialogFragment.Dial
         // get data with own made queryData method
         queryData();
 
-        // calculate total points in highscores
-        float points = 0f;
-        if (cursor.moveToFirst()) {
-            do {
-                float score = cursor.getFloat(2); // columnIndex
-                points += score;
-            } while(cursor.moveToNext());
-            Toast.makeText(getBaseContext(), "Total points: " + points, Toast.LENGTH_SHORT).show();
-        }
     }
 
     // query data from database
     public void queryData() {
-        //cursor = db.rawQuery("SELECT _id, name, score FROM highscores ORDER BY score DESC", null);
+        //cursor = db.rawQuery("SELECT item, count, price FROM ShoppingList ORDER BY item DESC", null);
         // get data with query
-        String[] resultColumns = new String[]{"_id","name","score"};
-        cursor = db.query(DATABASE_TABLE,resultColumns,null,null,null,null,"score DESC",null);
+        String[] resultColumns = new String[]{"item","count", "price"};
+        cursor = db.query(DATABASE_TABLE,resultColumns,null,null,null,null,"item DESC",null);
 
         // add data to adapter
         ListAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.list_item, cursor,
-                new String[] {"Item", "Count", "Price"},      // from
+                new String[] {"item", "count", "price"},      // from
                 new int[] {R.id.item, R.id.count, R.id.price}    // to
-                ,0);  // flags
+                ,1);  // flags
 
         // show data in listView
         listView.setAdapter(adapter);
